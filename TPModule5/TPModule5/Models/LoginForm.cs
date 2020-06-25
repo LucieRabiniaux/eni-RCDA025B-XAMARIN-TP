@@ -37,6 +37,7 @@ namespace TPModule5.Models
             //stocker les valeurs des champs dans des variables avant des les traiter
             String login = this.Login.Text;
             String password = this.Password.Text;
+
             String errorMessage = "";
 
             //utiliser Debug.WriteLine (et non Console.WriteLine)
@@ -53,7 +54,7 @@ namespace TPModule5.Models
             }
 
             //si le message d'erreur est non null : on affiche l'erreur.
-            //si pas d'erreur : masque le formulaire de connexion et on affiche les tweets.
+            //si pas d'erreur : on masque le formulaire de connexion et on affiche les tweets.
             if (!String.IsNullOrEmpty(errorMessage))
             {
                 this.Error.Text = errorMessage;
