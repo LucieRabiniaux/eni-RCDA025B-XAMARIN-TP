@@ -4,20 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TPModule5.MainPage">
+             x:Class="TPModule5.MainPage"
+             xmlns:views="clr-namespace:TPModule5">
 
     <StackLayout>
 
-        <!--Header barre de titre-->
-        <ContentView BackgroundColor="#58B0F0">
-            <StackLayout Orientation="Horizontal" Margin="10, 25">
-                <!--<Label Text="Nouveau" VerticalTextAlignment="Center"></Label>-->
-                <ImageButton Source="pencil" WidthRequest="25" BackgroundColor="Transparent"></ImageButton>
-                <Label Text="Accueil" TextColor="White" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"></Label>
-                <!--<Label Text="Rechercher" VerticalTextAlignment="Center"></Label>-->
-                <ImageButton Source="search" WidthRequest="25" BackgroundColor="Transparent"></ImageButton>
-            </StackLayout>
-        </ContentView>
+        <!--Header barre de titre ("include" du fichier Header.xaml)-->
+        <views:Header />
 
         <!--Formulaire de connexion-->
         <ContentView x:Name="loginForm" VerticalOptions="FillAndExpand">
@@ -35,50 +28,9 @@
                 <Button x:Name="btnLogin" Text="Se connecter"></Button>
             </StackLayout>
         </ContentView>
-        
-        <!--Zone de scroll-->
-        <ScrollView x:Name="tweets" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <!--Carte avec texte et boutons-->
-            <StackLayout Orientation="Vertical">
-                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                    <!--image + infos sur l'auteur-->
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10">
-                        <!--<ContentView Margin="10" WidthRequest="75" HeightRequest="75" BackgroundColor="Black"></ContentView>-->
-                        <Image Source="https://picsum.photos/50/50/?random" Margin="10" WidthRequest="75" Aspect="AspectFit"></Image>
-                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Lucie" TextColor="Black"></Label>
-                                <Label Text="@lrabiniaux" TextColor="LightGray"></Label>
-                                <Label Text="50s" TextColor="LightGray" HorizontalOptions="EndAndExpand"></Label>
-                            </StackLayout>
-                            <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod convallis dolor. Quisque ultricies porttitor nunc venenatis facilisis. " TextColor="Black"></Label>
-                        </StackLayout>
-                    </StackLayout>
-                    <!--Boutons-->
-                    <StackLayout Orientation="Horizontal">
-                        <!--<Label HorizontalOptions="FillAndExpand" Text="Répondre" HorizontalTextAlignment="Center" TextColor="Black"></Label>-->
-                        <!--<Label HorizontalOptions="FillAndExpand" Text="Retweet" HorizontalTextAlignment="Center" TextColor="Black"></Label>
-                        <Label HorizontalOptions="FillAndExpand" Text="Favoris" HorizontalTextAlignment="Center" TextColor="Black"></Label>-->
-                        <ImageButton Source="reply" WidthRequest="25" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"></ImageButton>
-                        <ImageButton Source="retweet" WidthRequest="25" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"></ImageButton>
-                        <ImageButton Source="favorite" WidthRequest="25" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"></ImageButton>
-                            
-                        </StackLayout>
-                        <ContentView HeightRequest="0.5" BackgroundColor="WhiteSmoke" HorizontalOptions="FillAndExpand"></ContentView>
-                    </StackLayout>
-                
-            </StackLayout>
-        </ScrollView>
 
-        <!--footer-->
-        <ContentView VerticalOptions="End">
-            <StackLayout Orientation="Horizontal" HeightRequest="75" >
-                <Label Text="Fil" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="#858585"/>
-                <Label Text="Notifications" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="#858585"/>
-                <Label Text="Messages" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="#858585"/>
-                <Label Text="Moi" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="#858585"/>
-            </StackLayout>
-        </ContentView>
+        <!--Footer-->
+        <views:Footer />
 
     </StackLayout>
 

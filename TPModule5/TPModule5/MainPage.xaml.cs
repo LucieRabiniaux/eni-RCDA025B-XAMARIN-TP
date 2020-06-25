@@ -21,36 +21,15 @@ namespace TPModule5
 
             this.twitterService = new TwitterService();
 
+            this.error.IsVisible = false;
             this.btnLogin.Clicked += BtnLogin_Clicked; ;
 
-            //vérification de la connection internet (cf. https://docs.microsoft.com/fr-fr/xamarin/essentials/connectivity?context=xamarin%2Fxamarin-forms&tabs=android)
-            var current = Connectivity.NetworkAccess;
-            if (current != NetworkAccess.Internet)
-            {
-                this.error.Text = "Veuillez vous connecter à Internet";
-            }
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
-
         }
 
-        /**
-         * gestion de l'évènement si la connexion à Internet change
-         */
-        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-        {
-            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-            {
-                this.error.IsVisible = false;
-            }
-            else
-            {
-                this.error.IsVisible = true;
-                this.error.Text = "Veuillez vous connecter à Internet";
-            }
-        }
 
         /**
-         * vérification de la connection internet (cf. https://docs.microsoft.com/fr-fr/xamarin/essentials/connectivity?context=xamarin%2Fxamarin-forms&tabs=android)
+         * vérification de la connection internet
          */
         public bool IsConnected()
         {
@@ -91,7 +70,6 @@ namespace TPModule5
             }
 
             //si contraintes non validées, on affiche un message d'erreur
-            //si contraintes validées, on passe à l'authentification (authenticate())
             if (!String.IsNullOrEmpty(errorMessage))
             {
                 this.error.Text = errorMessage;
@@ -99,13 +77,10 @@ namespace TPModule5
             }
             else
             {
-                //si l'authentification réussie on affiche les tweets et on masque le form de connexion.
-                //Sinon on indique que cet utilisateur ne possède pas de tweets.
+                //si l'authentification réussie on passe à la page Tweets
                 if (twitterService.Authenticate(new User(login, password)))
                 {
-                    this.loginForm.IsVisible = false;
-                    this.tweets.IsVisible = true;
-
+                    GoToTweetsPage();
                 }
                 else
                 {
@@ -113,5 +88,27 @@ namespace TPModule5
                 }
             }
         }
+
+        async void GoToTweetsPage()
+        {
+            await Navigation.PushAsync(new TweetsPage());
+        }
+
+        /**
+         * gestion de l'évènement si la connexion à Internet change
+         */
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            {
+                this.error.IsVisible = false;
+            }
+            else
+            {
+                this.error.IsVisible = true;
+                this.error.Text = "Veuillez vous connecter à Internet";
+            }
+        }
+
     }
 }

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TPModule5.TweetsPage"
+             xmlns:views="clr-namespace:TPModule5">
+    <ContentPage.Content>
+
+        <StackLayout>
+
+            <!--Header barre de titre ("include" du fichier Header.xaml)-->
+            <views:Header />
+
+            <ListView x:Name="tweets" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowHeight="150">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <!--Carte avec texte et boutons-->
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                <!--image + infos sur l'auteur-->
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10">
+                                    <Image Source="https://picsum.photos/50/50/?random" Margin="10" WidthRequest="75" Aspect="AspectFill"></Image>
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding User.UserName}" TextColor="Black"></Label>
+                                            <Label Text="{Binding User.UserPseudo, StringFormat='@{0}'}" TextColor="LightGray"></Label>
+                                            <Label Text="{Binding CreationDate}" TextColor="LightGray" HorizontalOptions="EndAndExpand"></Label>
+                                        </StackLayout>
+                                        <Label Text="{Binding Text}" TextColor="Black"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                                <!--Boutons-->
+                                <StackLayout Orientation="Horizontal">
+                                    <ImageButton Source="reply" WidthRequest="25" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"></ImageButton>
+                                    <ImageButton Source="retweet" WidthRequest="25" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"></ImageButton>
+                                    <ImageButton Source="favorite" WidthRequest="25" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"></ImageButton>
+
+                                </StackLayout>
+                                <ContentView HeightRequest="0.5" BackgroundColor="WhiteSmoke" HorizontalOptions="FillAndExpand"></ContentView>
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--Footer-->
+            <views:Footer />
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
