@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TPModule5.Models;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace TPModule5
 {
@@ -18,12 +19,48 @@ namespace TPModule5
         {
             InitializeComponent();
 
-            //gestion de l'évènement au clic sur le bouton "Se connecter"
+            this.twitterService = new TwitterService();
+
             this.btnLogin.Clicked += BtnLogin_Clicked; ;
 
-            this.twitterService = new TwitterService();
+            //vérification de la connection internet (cf. https://docs.microsoft.com/fr-fr/xamarin/essentials/connectivity?context=xamarin%2Fxamarin-forms&tabs=android)
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                this.error.Text = "Veuillez vous connecter à Internet";
+            }
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+
         }
 
+        /**
+         * gestion de l'évènement si la connexion à Internet change
+         */
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            {
+                this.error.IsVisible = false;
+            }
+            else
+            {
+                this.error.IsVisible = true;
+                this.error.Text = "Veuillez vous connecter à Internet";
+            }
+        }
+
+        /**
+         * vérification de la connection internet (cf. https://docs.microsoft.com/fr-fr/xamarin/essentials/connectivity?context=xamarin%2Fxamarin-forms&tabs=android)
+         */
+        public bool IsConnected()
+        {
+            bool isConnected = true;
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                isConnected = false;   
+            }
+            return isConnected;
+        }
 
         /**
          * gestion de l'évènement au clic sur le bouton "Se connecter"
@@ -36,6 +73,13 @@ namespace TPModule5
 
             String errorMessage = "";
 
+            //vérification de la connection Internet
+            if (!IsConnected())
+            {
+                this.error.Text = "Veuillez vous connecter à Internet";
+                return;
+            }
+            
             //vérification des contraintes de format
             if (String.IsNullOrEmpty(login) || login.Length < 3)
             {
