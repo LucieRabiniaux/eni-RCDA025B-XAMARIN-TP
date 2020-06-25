@@ -7,10 +7,6 @@
              x:Class="TPModule5.MainPage">
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <!--<Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />-->
 
         <!--Header barre de titre-->
         <ContentView BackgroundColor="#58B0F0">
@@ -24,23 +20,24 @@
         </ContentView>
 
         <!--Formulaire de connexion-->
-        <ContentView>
+        <ContentView x:Name="loginForm" VerticalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical">
-                <Label Text="Connexion à Twitter" HorizontalTextAlignment="Center"></Label>
-                <Entry Placeholder="Identifiant Twitter"></Entry>
-                <Entry Placeholder="Mot de passe" IsPassword="True"></Entry>
+                <Label Text="Connexion à Twitter" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"></Label>
+                <Entry x:Name="idTwitter" Placeholder="Identifiant Twitter"></Entry>
+                <Entry x:Name="password" Placeholder="Mot de passe" IsPassword="True"></Entry>
                 <!--switch-->
                 <StackLayout Orientation="Horizontal">
-                    <Switch IsToggled="True"></Switch>
+                    <Switch x:Name="isRemind" IsToggled="True"></Switch>
                     <Label Text="Mémoriser mes informations"></Label>
                 </StackLayout>
-                <Button Text="Se connecter"></Button>
-                
+                <!--Label permettant si besoin l'affichage d'un message d'erreur-->
+                <Label x:Name="error" TextColor="Red"></Label>
+                <Button x:Name="btnLogin" Text="Se connecter"></Button>
             </StackLayout>
         </ContentView>
         
         <!--Zone de scroll-->
-        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView x:Name="tweets" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <!--Carte avec texte et boutons-->
             <StackLayout Orientation="Vertical">
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
@@ -59,7 +56,7 @@
                     </StackLayout>
                     <!--Boutons-->
                     <StackLayout Orientation="Horizontal">
-                            <!--<Label HorizontalOptions="FillAndExpand" Text="Répondre" HorizontalTextAlignment="Center" TextColor="Black"></Label>-->
+                        <!--<Label HorizontalOptions="FillAndExpand" Text="Répondre" HorizontalTextAlignment="Center" TextColor="Black"></Label>-->
                         <!--<Label HorizontalOptions="FillAndExpand" Text="Retweet" HorizontalTextAlignment="Center" TextColor="Black"></Label>
                         <Label HorizontalOptions="FillAndExpand" Text="Favoris" HorizontalTextAlignment="Center" TextColor="Black"></Label>-->
                         <ImageButton Source="reply" WidthRequest="25" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent"></ImageButton>
@@ -74,8 +71,8 @@
         </ScrollView>
 
         <!--footer-->
-        <ContentView>
-            <StackLayout Orientation="Horizontal" HeightRequest="75">
+        <ContentView VerticalOptions="End">
+            <StackLayout Orientation="Horizontal" HeightRequest="75" >
                 <Label Text="Fil" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="#858585"/>
                 <Label Text="Notifications" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="#858585"/>
                 <Label Text="Messages" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="#858585"/>
