@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TPModule5.Models;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using TPModule5.Data;
 
 namespace TPModule5
 {
@@ -26,7 +27,8 @@ namespace TPModule5
 
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
 
-            //test d'ajout des tweets en BDD
+            var context = new AppDbContext();
+
         }
 
 

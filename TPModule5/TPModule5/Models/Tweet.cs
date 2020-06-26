@@ -16,9 +16,10 @@ namespace TPModule5.Models
         public String Text { get; set; }
         public virtual User User { get; set; }
 
-        public Tweet(int tweetId, string creationDate, string text, User user)
+        public Tweet() { }
+
+        public Tweet(string creationDate, string text, User user)
         {
-            TweetId = tweetId;
             CreationDate = creationDate;
             Text = text;
             User = user;

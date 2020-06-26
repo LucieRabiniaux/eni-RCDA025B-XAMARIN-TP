@@ -1,18 +1,24 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TPModule5.Models
 {
+    [Table("Users")]
     public class User
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public String UserPseudo { get; set; }
         public String UserName { get; set; }
         public String Login { get; set; }
         public String Password { get; set; }
 
-        public User(int userId, string userPseudo, string userName, string login, string password)
+        public User() { }
+
+        public User(string userPseudo, string userName, string login, string password)
         {
-            UserId = userId;
             UserPseudo = userPseudo;
             UserName = userName;
             Login = login;
