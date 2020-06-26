@@ -25,6 +25,8 @@ namespace TPModule5
             this.btnLogin.Clicked += BtnLogin_Clicked; ;
 
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+
+            //test d'ajout des tweets en BDD
         }
 
 
